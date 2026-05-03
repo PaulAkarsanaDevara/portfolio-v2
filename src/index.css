@@ -7,3 +7,24 @@
   body { background: #060608; color: #f4f3ff; }
   * { box-sizing: border-box; }
 }
+
+@layer base {
+  .modal-open { overflow: hidden; }
+}
+
+@layer utilities {
+  .gradient-text {
+    background: linear-gradient(135deg, #a78bfa 0%, #38bdf8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glow-accent {
+    box-shadow: 0 0 18px rgba(167, 139, 250, 0.35);
+  }
+
+  .glow-accent:hover {
+    box-shadow: 0 0 28px rgba(167, 139, 250, 0.55);
+  }
+}

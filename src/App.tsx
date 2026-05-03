@@ -1,13 +1,13 @@
-import { useAppSelector } from './hooks'
-import Navbar from './components/Navbar'
-import CursorGlow from './components/CursorGlow'
-import Home from './pages/Home'
-import Projects from './pages/Projects'
-import Experience from './pages/Experience'
-import Contact from './pages/Contact'
+import { useAppSelector } from './hooks';
+import Navbar from './components/Navbar';
+import CursorGlow from './components/CursorGlow';
+import Home from './pages/Home';
+import Projects from './pages/Projects';
+import Experience from './pages/Experience';
+import Contact from './pages/Contact';
 
 export default function App() {
-  const currentPage = useAppSelector((s) => s.ui.currentPage)
+  const currentPage = useAppSelector((s) => s.ui.currentPage);
 
   return (
     <div className="min-h-screen bg-bg">
@@ -20,9 +20,8 @@ export default function App() {
         {currentPage === 'contact' && <Contact />}
       </main>
       <footer className="border-t border-border px-10 py-6 flex justify-between items-center font-mono text-[11px] text-muted">
-        <span>© 2025 Arya Pratama</span>
-        <span>Built with React · TypeScript · Redux · Tailwind</span>
+        <span>© 2026 Farhan</span>
       </footer>
     </div>
-  )
+  );
 }
