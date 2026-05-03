@@ -1,74 +1,70 @@
 import { useEffect, useRef } from 'react';
 import {
-  SiReact, SiTypescript, SiRedux, SiNextdotjs, SiTailwindcss,
-  SiNodedotjs, SiExpress, SiPostgresql, SiPrisma, SiGraphql,
-  SiDocker, SiRedis, SiFigma, SiGit,
+  SiReact,
+  SiTypescript,
+  SiRedux,
+  SiNextdotjs,
+  SiTailwindcss,
+  SiNodedotjs,
+  SiExpress,
+  SiPostgresql,
+  SiPrisma,
+  SiGraphql,
+  SiDocker,
+  SiRedis,
+  SiFigma,
+  SiGit,
 } from 'react-icons/si';
 import { TbBrandAws } from 'react-icons/tb';
 import { FaEnvelope, FaLinkedinIn, FaGithub, FaTwitter } from 'react-icons/fa';
 import type { IconType } from 'react-icons';
 import { useAppDispatch } from '../hooks';
 import { setPage } from '../store/slices/uiSlice';
-import { STATS, CONTACT_LINKS } from '../data';
+import { CONTACT_LINKS } from '../data';
 
 const TECH_STACK: { name: string; icon: IconType; color: string }[] = [
-  { name: 'React',      icon: SiReact,      color: '#61DAFB' },
+  { name: 'React', icon: SiReact, color: '#61DAFB' },
   { name: 'TypeScript', icon: SiTypescript, color: '#3178C6' },
-  { name: 'Redux',      icon: SiRedux,      color: '#764ABC' },
-  { name: 'Next.js',    icon: SiNextdotjs,  color: '#ffffff' },
-  { name: 'Tailwind',   icon: SiTailwindcss,color: '#06B6D4' },
-  { name: 'Node.js',    icon: SiNodedotjs,  color: '#5FA04E' },
-  { name: 'Express',    icon: SiExpress,    color: '#ffffff' },
+  { name: 'Redux', icon: SiRedux, color: '#764ABC' },
+  { name: 'Next.js', icon: SiNextdotjs, color: '#ffffff' },
+  { name: 'Tailwind', icon: SiTailwindcss, color: '#06B6D4' },
+  { name: 'Node.js', icon: SiNodedotjs, color: '#5FA04E' },
+  { name: 'Express', icon: SiExpress, color: '#ffffff' },
   { name: 'PostgreSQL', icon: SiPostgresql, color: '#4169E1' },
-  { name: 'Prisma',     icon: SiPrisma,     color: '#5a67d8' },
-  { name: 'GraphQL',    icon: SiGraphql,    color: '#E10098' },
-  { name: 'Docker',     icon: SiDocker,     color: '#2496ED' },
-  { name: 'AWS',        icon: TbBrandAws,   color: '#FF9900' },
-  { name: 'Redis',      icon: SiRedis,      color: '#FF4438' },
-  { name: 'Figma',      icon: SiFigma,      color: '#F24E1E' },
-  { name: 'Git',        icon: SiGit,        color: '#F05032' },
+  { name: 'Prisma', icon: SiPrisma, color: '#5a67d8' },
+  { name: 'GraphQL', icon: SiGraphql, color: '#E10098' },
+  { name: 'Docker', icon: SiDocker, color: '#2496ED' },
+  { name: 'AWS', icon: TbBrandAws, color: '#FF9900' },
+  { name: 'Redis', icon: SiRedis, color: '#FF4438' },
+  { name: 'Figma', icon: SiFigma, color: '#F24E1E' },
+  { name: 'Git', icon: SiGit, color: '#F05032' },
 ];
 
 const SOCIAL_ICONS: Record<string, IconType> = {
-  Email:    FaEnvelope,
+  Email: FaEnvelope,
   LinkedIn: FaLinkedinIn,
-  GitHub:   FaGithub,
-  Twitter:  FaTwitter,
+  GitHub: FaGithub,
+  Twitter: FaTwitter,
 };
 
-function StatCard({ label, value, suffix }: { label: string; value: number; suffix: string }) {
-  const ref = useRef<HTMLSpanElement>(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    let v = 0;
-    const step = Math.max(1, Math.ceil(value / 40));
-    const timer = setInterval(() => {
-      v = Math.min(v + step, value);
-      el.textContent = v + suffix;
-      if (v >= value) clearInterval(timer);
-    }, 35);
-    return () => clearInterval(timer);
-  }, [value, suffix]);
-
-  return (
-    <div className="bg-bg-2 border border-border rounded-xl p-5 hover:border-accent/30 transition-colors duration-200">
-      <div className="text-[32px] font-black text-white mb-1 font-cabinet">
-        <span ref={ref}>0{suffix}</span>
-      </div>
-      <div className="font-mono text-[10px] text-muted tracking-[1.5px]">{label}</div>
-    </div>
-  );
-}
-
-function TechCard({ name, icon: Icon, color }: { name: string; icon: IconType; color: string }) {
+function TechCard({
+  name,
+  icon: Icon,
+  color,
+}: {
+  name: string;
+  icon: IconType;
+  color: string;
+}) {
   return (
     <div
       className="group bg-bg-2 border border-border rounded-xl p-4 flex flex-col items-center gap-2.5 cursor-default transition-all duration-200 hover:-translate-y-1 hover:bg-bg-3"
       style={{ '--brand': color } as React.CSSProperties}
     >
-      <Icon size={28} className="text-muted transition-colors duration-200 group-hover:text-[var(--brand)]" />
+      <Icon
+        size={28}
+        className="text-muted transition-colors duration-200 group-hover:text-[var(--brand)]"
+      />
       <span className="font-mono text-[10px] text-muted group-hover:text-white transition-colors duration-200 text-center leading-tight">
         {name}
       </span>
@@ -81,12 +77,13 @@ export default function Home() {
 
   return (
     <div className="animate-fade-up max-w-4xl mx-auto">
-
       {/* Hero */}
       <section className="px-10 pt-16 pb-12">
         <div className="inline-flex items-center gap-2 border border-border bg-bg-2 px-3 py-1.5 rounded-full mb-8">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse2" />
-          <span className="font-mono text-[11px] text-muted">Available for work</span>
+          <span className="font-mono text-[11px] text-muted">
+            Available for work
+          </span>
         </div>
 
         <h1 className="text-[clamp(48px,8vw,88px)] font-black leading-[0.95] tracking-[-3px] mb-6">
@@ -125,7 +122,9 @@ export default function Home() {
 
         {/* Social Links */}
         <div className="flex items-center gap-4">
-          <span className="font-mono text-[10px] text-muted tracking-[1.5px]">FIND ME ON</span>
+          <span className="font-mono text-[10px] text-muted tracking-[1.5px]">
+            FIND ME ON
+          </span>
           <div className="flex gap-2">
             {CONTACT_LINKS.map((link) => {
               const Icon = SOCIAL_ICONS[link.title];
@@ -147,25 +146,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats */}
-      <section className="px-10 pb-12">
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          {STATS.map((s) => (
-            <StatCard key={s.label} label={s.label} value={s.value} suffix={s.suffix} />
-          ))}
-        </div>
-      </section>
-
       {/* Tech Stack */}
       <section className="px-10 pb-16">
-        <p className="font-mono text-[10px] text-muted tracking-[1.5px] mb-4">TECH STACK</p>
+        <p className="font-mono text-[10px] text-muted tracking-[1.5px] mb-4">
+          TECH STACK
+        </p>
         <div className="grid grid-cols-[repeat(auto-fill,minmax(88px,1fr))] gap-3">
           {TECH_STACK.map((tech) => (
             <TechCard key={tech.name} {...tech} />
           ))}
         </div>
       </section>
-
     </div>
   );
 }
